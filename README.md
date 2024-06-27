@@ -1,3 +1,3 @@
-# cpp_project_template
+# basic_example_for_modern_cpp
 
-The template for cpp projects
+Basic Modern C++ example code printing "Hello, World!"

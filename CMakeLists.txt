@@ -7,10 +7,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 project(
-  CPP_PROJECT_TEMPLATE
+  basic_example_for_modern_cpp
   LANGUAGES CXX
   VERSION 1.0.0
-  DESCRIPTION "C++ Project Template"
+  DESCRIPTION "Basic Modern C++ example code printing 'Hello, World!'"
   HOMEPAGE_URL "groundbuilder.co.kr"
 )
 message(STATUS)
@@ -33,11 +33,6 @@ endif()
 set(${PROJECT_NAME}_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 set(${PROJECT_NAME}_SOURCE_PATH "${${PROJECT_NAME}_ROOT_PATH}/src")
 set(${PROJECT_NAME}_INCLUDE_PATH "${${PROJECT_NAME}_ROOT_PATH}/include")
-set(${PROJECT_NAME}_THIRDPARTY_PATH "${${PROJECT_NAME}_ROOT_PATH}/thirdparty")
-set(${PROJECT_NAME}_MODULE_PATH "${${PROJECT_NAME}_ROOT_PATH}/module")
-set(${PROJECT_NAME}_TEST_PATH "${${PROJECT_NAME}_ROOT_PATH}/test")
-set(${PROJECT_NAME}_APPLICATION_PATH "${${PROJECT_NAME}_ROOT_PATH}/application")
-set(${PROJECT_NAME}_RESOURCE_PATH "${${PROJECT_NAME}_ROOT_PATH}/resource")
 
 if(NOT PARSED_SYSTEM_INFO)
   # ! Message for the system information
@@ -80,18 +75,10 @@ message(STATUS "---------------Procject path information---------------")
 message(STATUS "${PROJECT_NAME}_ROOT_PATH: ${${PROJECT_NAME}_ROOT_PATH}")
 message(STATUS "${PROJECT_NAME}_INCLUDE_PATH: ${${PROJECT_NAME}_INCLUDE_PATH}")
 message(STATUS "${PROJECT_NAME}_SOURCE_PATH: ${${PROJECT_NAME}_SOURCE_PATH}")
-message(STATUS "${PROJECT_NAME}_THIRDPARTY_PATH: ${${PROJECT_NAME}_THIRDPARTY_PATH}")
-message(STATUS "${PROJECT_NAME}_MODULE_PATH: ${${PROJECT_NAME}_MODULE_PATH}")
-message(STATUS "${PROJECT_NAME}_TEST_PATH: ${${PROJECT_NAME}_TEST_PATH}")
-message(STATUS "${PROJECT_NAME}_APPLICATION_PATH: ${${PROJECT_NAME}_APPLICATION_PATH}")
-message(STATUS "${PROJECT_NAME}_RESOURCE_PATH: ${${PROJECT_NAME}_RESOURCE_PATH}")
 message(STATUS "")
 
-add_subdirectory(${${PROJECT_NAME}_THIRDPARTY_PATH})
-add_subdirectory(${${PROJECT_NAME}_MODULE_PATH})
-add_subdirectory(${${PROJECT_NAME}_APPLICATION_PATH})
-
 set(${PROJECT_NAME}_SOURCE_FILES
+  src/main.cpp
 
   # ! Add source files here
 )
@@ -102,9 +89,9 @@ set(${PROJECT_NAME}_SOURCE_FILES
 # )
 
 # ! If you want to make an executable, use the following code
-# add_executable(${PROJECT_NAME}
-# ${${PROJECT_NAME}_SOURCE_FILES}
-# )
+add_executable(${PROJECT_NAME}
+  ${${PROJECT_NAME}_SOURCE_FILES}
+)
 
 # ! If you want to add include directories and link libraries, use the following code
 # target_include_directories(${PROJECT_NAME} PUBLIC
@@ -120,12 +107,10 @@ set(${PROJECT_NAME}_SOURCE_FILES
 
 # ! Add dependencies here
 # )
-# target_compile_options(${PROJECT_NAME} PRIVATE
-# ${CPP_COMFILE_FLAGS}
-# )
-# include(cmake/create_documents.cmake)
+target_compile_options(${PROJECT_NAME} PRIVATE
+  ${CPP_COMFILE_FLAGS}
+)
 
-add_subdirectory(${${PROJECT_NAME}_TEST_PATH})
 message(STATUS)
 message(STATUS "Finished all process in ${PROJECT_NAME} CMakeLists.txt.")
 message(STATUS)
